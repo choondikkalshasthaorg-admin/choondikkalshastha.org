@@ -1,4 +1,4 @@
-/* 1. Variables & Global Setup */
+/* --- 1. Global & Responsive Setup --- */
 :root {
     --temple-red: #8b0000;
     --saffron: #ff9933;
@@ -6,7 +6,6 @@
     --cream: #fffaf0;
     --text-dark: #2c2c2c;
     --white: #ffffff;
-    --shadow: 0 4px 15px rgba(0,0,0,0.08);
 }
 
 * {
@@ -20,178 +19,88 @@ body {
     background-color: var(--cream);
     color: var(--text-dark);
     line-height: 1.6;
+    overflow-x: hidden; /* Prevents horizontal scrolling */
 }
 
-/* 2. Navigation & Logo */
+/* --- 2. Responsive Navigation --- */
 nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0.5rem 10%;
+    padding: 1rem 5%;
     background: var(--white);
     box-shadow: 0 2px 10px rgba(0,0,0,0.1);
     position: sticky;
     top: 0;
     z-index: 1000;
+    flex-wrap: wrap; /* Allows menu to drop down on small phones */
 }
 
-.logo a {
-    display: flex;
-    align-items: center;
-    text-decoration: none;
-}
-
-/* The specific logo styling you needed */
 .nav-logo {
-    height: 70px; /* Adjust based on your PNG proportions */
+    height: 50px; 
     width: auto;
-    display: block;
-    filter: drop-shadow(0px 2px 4px rgba(212, 175, 55, 0.4));
-    transition: transform 0.3s ease;
-}
-
-.nav-logo:hover {
-    transform: scale(1.05);
 }
 
 nav ul {
     display: flex;
     list-style: none;
-    gap: 30px;
+    gap: 15px;
 }
 
 nav a {
     text-decoration: none;
     color: var(--text-dark);
     font-weight: 600;
-    font-size: 1.1rem;
-    transition: 0.3s;
+    font-size: 0.9rem;
 }
 
-nav a:hover {
-    color: var(--temple-red);
-}
-
-/* 3. Hero Section */
+/* --- 3. Hero Section --- */
 .hero {
     text-align: center;
-    padding: 120px 20px;
+    padding: 60px 20px;
     background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
                 url('https://images.unsplash.com/photo-1542310503-60533f019623?auto=format&fit=crop&q=80&w=1600') center/cover;
     color: var(--white);
 }
 
 .hero h1 {
-    font-size: 3.5rem;
-    margin-bottom: 15px;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    font-size: 2rem; /* Smaller for mobile */
+    margin-bottom: 10px;
 }
 
-/* 4. Content Layout */
+/* --- 4. Content Sections --- */
 section {
-    padding: 80px 10%;
-    max-width: 1200px;
-    margin: 0 auto;
+    padding: 40px 5%; /* More breathing room on mobile */
 }
 
-h2 {
-    text-align: center;
-    color: var(--temple-red);
-    border-bottom: 3px solid var(--gold);
-    display: inline-block;
-    margin-bottom: 40px;
-    padding-bottom: 5px;
+/* --- 5. Responsive Table (The most important part) --- */
+.table-container {
+    width: 100%;
+    overflow-x: auto; /* Adds a side-scroll to JUST the table if it's too wide */
+    margin-top: 20px;
 }
 
-.center-container {
-    text-align: center;
-}
-
-/* 5. Tables (Pooja Timings) */
 .timing-table {
     width: 100%;
+    min-width: 500px; /* Ensures the table doesn't squash too much */
     border-collapse: collapse;
     background: var(--white);
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: var(--shadow);
 }
 
-.timing-table th {
-    background: var(--temple-red);
-    color: var(--white);
-    padding: 18px;
-    font-size: 1.1rem;
-}
-
-.timing-table td {
-    padding: 15px;
-    border-bottom: 1px solid #f0f0f0;
-    text-align: center;
-}
-
-.timing-table tr:hover {
-    background-color: #fffdf5;
-}
-
-/* 6. Forms (Booking) */
+/* --- 6. Form Adjustments --- */
 .booking-form {
-    max-width: 550px;
+    width: 100%;
+    max-width: 500px;
     margin: 0 auto;
-    background: var(--white);
-    padding: 40px;
-    border-radius: 15px;
-    box-shadow: var(--shadow);
+    padding: 20px;
 }
 
-.form-group {
-    margin-bottom: 20px;
-}
-
-label {
-    display: block;
-    margin-bottom: 8px;
-    font-weight: 600;
-    color: var(--temple-red);
-}
-
-input, select, textarea {
-    width: 100%;
-    padding: 14px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    font-family: inherit;
-    font-size: 1rem;
-}
-
-input:focus {
-    outline: 2px solid var(--saffron);
-    border-color: transparent;
-}
-
-/* 7. Buttons */
-.btn-primary {
-    background: var(--temple-red);
-    color: var(--white);
-    padding: 15px 35px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 1.1rem;
-    font-weight: bold;
-    width: 100%;
-    transition: background 0.3s ease;
-}
-
-.btn-primary:hover {
-    background: #660000;
-    box-shadow: 0 4px 10px rgba(139, 0, 0, 0.3);
-}
-
-/* 8. Responsive Design (For Mobile) */
-@media (max-width: 768px) {
-    nav { padding: 1rem 5%; flex-direction: column; gap: 15px; }
-    .hero h1 { font-size: 2.2rem; }
-    section { padding: 40px 5%; }
-    nav ul { gap: 15px; font-size: 0.9rem; }
+/* --- 7. Media Queries (For Desktop Upgrades) --- */
+@media (min-width: 768px) {
+    nav { padding: 1rem 10%; }
+    nav a { font-size: 1.1rem; }
+    .nav-logo { height: 70px; }
+    .hero { padding: 120px 20px; }
+    .hero h1 { font-size: 3.5rem; }
+    nav ul { gap: 30px; }
 }
