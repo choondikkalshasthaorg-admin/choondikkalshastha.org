@@ -1,106 +1,56 @@
-/* --- 1. Global & Responsive Setup --- */
-:root {
-    --temple-red: #8b0000;
-    --saffron: #ff9933;
-    --gold: #d4af37;
-    --cream: #fffaf0;
-    --text-dark: #2c2c2c;
-    --white: #ffffff;
-}
-
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-
-body {
-    font-family: 'Playfair Display', serif;
-    background-color: var(--cream);
-    color: var(--text-dark);
-    line-height: 1.6;
-    overflow-x: hidden; /* Prevents horizontal scrolling */
-}
-
-/* --- 2. Responsive Navigation --- */
-nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem 5%;
-    background: var(--white);
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    flex-wrap: wrap; /* Allows menu to drop down on small phones */
-}
-
-.nav-logo {
-    height: 50px; 
-    width: auto;
-}
-
-nav ul {
-    display: flex;
-    list-style: none;
-    gap: 15px;
-}
-
-nav a {
-    text-decoration: none;
-    color: var(--text-dark);
-    font-weight: 600;
-    font-size: 0.9rem;
-}
-
-/* --- 3. Hero Section --- */
+/* --- 3. Hero Slider Enhancements --- */
 .hero {
-    text-align: center;
-    padding: 60px 20px;
-    background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
-                url('https://images.unsplash.com/photo-1542310503-60533f019623?auto=format&fit=crop&q=80&w=1600') center/cover;
+    position: relative;
+    padding: 0; /* Reset padding for full-bleed images */
+    height: 60vh; /* Mobile height */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: #000; /* Fallback */
+}
+
+/* The dark gradient overlay for text readability */
+.slider-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 10;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.7) 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     color: var(--white);
-}
-
-.hero h1 {
-    font-size: 2rem; /* Smaller for mobile */
-    margin-bottom: 10px;
-}
-
-/* --- 4. Content Sections --- */
-section {
-    padding: 40px 5%; /* More breathing room on mobile */
-}
-
-/* --- 5. Responsive Table (The most important part) --- */
-.table-container {
-    width: 100%;
-    overflow-x: auto; /* Adds a side-scroll to JUST the table if it's too wide */
-    margin-top: 20px;
-}
-
-.timing-table {
-    width: 100%;
-    min-width: 500px; /* Ensures the table doesn't squash too much */
-    border-collapse: collapse;
-    background: var(--white);
-}
-
-/* --- 6. Form Adjustments --- */
-.booking-form {
-    width: 100%;
-    max-width: 500px;
-    margin: 0 auto;
+    text-align: center;
     padding: 20px;
 }
 
-/* --- 7. Media Queries (For Desktop Upgrades) --- */
+/* Individual Slide Layer */
+.slide {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    z-index: 1;
+    transition: opacity 2500ms ease-in-out; /* Smooth calm fade */
+    background-size: cover;
+    background-position: center;
+}
+
+.slide.active {
+    opacity: 1;
+}
+
+/* The Ken Burns (Zoom) Effect */
+.slide.active-animation {
+    animation: kenBurns 15s linear forwards;
+}
+
+@keyframes kenBurns {
+    from { transform: scale(1); }
+    to { transform: scale(1.1); }
+}
+
+/* Desktop Upgrade for Hero Height */
 @media (min-width: 768px) {
-    nav { padding: 1rem 10%; }
-    nav a { font-size: 1.1rem; }
-    .nav-logo { height: 70px; }
-    .hero { padding: 120px 20px; }
-    .hero h1 { font-size: 3.5rem; }
-    nav ul { gap: 30px; }
+    .hero { height: 85vh; }
 }
